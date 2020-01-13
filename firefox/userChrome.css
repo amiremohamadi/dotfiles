@@ -1,0 +1,52 @@
+/*
+    this is my config to move firefox address bar and tabs
+    to the bottom of window!
+    put this file to chrome folder located under firefox directory
+*/
+
+@namespace "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
+
+@-moz-document url("chrome://browser/content/browser.xul") {
+    #PopupAutoCompleteRichResult {
+        /* bindings.xml in the same folder as userChrome.css */
+        -moz-binding: url("bindings.xml#urlbar-popup") !important;
+    }
+    
+    #navigator-toolbox {
+        display: contents !important;
+    }
+    
+    #nav-bar {
+        -moz-box-ordinal-group: 2 !important;
+}
+
+/* mov tabs on the bottom of firefox window */
+/* tabs on bottom of window */
+#navigator-toolbox { -moz-box-ordinal-group: 10; }
+
+#TabsToolbar { -moz-box-ordinal-group: 10; }
+
+#PopupAutoCompleteRichResult {
+  margin-top: -35vh;
+  /*
+  position: fixed;
+  bottom: 74px;
+  margin-left: 0 !important;
+  */
+}
+
+#PopupAutoCompleteRichResult > hbox { display: none; }
+
+.tab-background { border-top: none !important; }
+
+#navigator-toolbox::after { border: none; }
+
+#TabsToolbar .tabbrowser-arrowscrollbox,
+
+#tabbrowser-tabs, .tab-stack { min-height: 28px !important; }
+
+.tabbrowser-tab { font-size: 80%; }
+
+.tab-content { padding: 0 5px; }
+
+.tab-close-button .toolbarbutton-icon { width: 12px !important; height: 12px !important; }

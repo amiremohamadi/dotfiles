@@ -64,7 +64,10 @@ map<Esc>[1;6C :TmuxNavigateRight<cr>
 map<Esc>[1;6A :TmuxNavigateUp<cr>
 map<Esc>[1;6B :TmuxNavigateDown<cr>
 " run python inside vim
-nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
+let dir=expand('%:p:h') 
+let name=expand('%:t') . '.vimconfig' 
+let fullname=dir . '/' . name
+nnoremap <buffer> <F9> :exec '!sh' fullname<cr>
 
 " indent back using Shift+Tab (both insert mode and command mode)
 nnoremap <S-Tab> <<

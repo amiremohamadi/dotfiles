@@ -25,6 +25,12 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'matze/vim-move'
 Plug 'preservim/nerdtree'
+Plug 'tomasiser/vim-code-dark'
+Plug 'sickill/vim-monokai'
+Plug 'srcery-colors/srcery-vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'hdima/python-syntax'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
@@ -40,8 +46,11 @@ set expandtab
 set softtabstop=4
 set shiftwidth=4
 set mouse=a
+set colorcolumn=80
 
 " plugins configurations
+" set theme style
+colorscheme codedark
 
 " vim move configuration
 let g:move_map_keys = 0
@@ -55,9 +64,28 @@ map<Esc>[1;6C :TmuxNavigateRight<cr>
 map<Esc>[1;6A :TmuxNavigateUp<cr>
 map<Esc>[1;6B :TmuxNavigateDown<cr>
 " run python inside vim
-nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
 
 " indent back using Shift+Tab (both insert mode and command mode)
 nnoremap <S-Tab> <<
 inoremap <S-Tab> <C-d>
 
+" vim coc (completion) use tab beside of arrow keys
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+
+" NERDTree toggleing
+nmap <C-b> :NERDTreeToggle<CR>
+
+" multiple cursors vim configuration
+let g:multi_cursor_use_default_mapping=0
+
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-d>'
+let g:multi_cursor_next_key            = '<C-d>'
+let g:multi_cursor_quit_key            = '<C-x>'
+
+" tab mangaement
+nnoremap <C-]> :tabnext<CR>
+
+" commentary configuration
+noremap <C-m> :Commentary

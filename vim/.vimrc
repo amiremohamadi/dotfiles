@@ -31,6 +31,10 @@ Plug 'srcery-colors/srcery-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'hdima/python-syntax'
 Plug 'tpope/vim-commentary'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'craigemery/vim-autotag'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -51,6 +55,7 @@ set colorcolumn=80
 " plugins configurations
 " set theme style
 colorscheme codedark
+" colorscheme monokai
 
 " vim move configuration
 let g:move_map_keys = 0
@@ -91,4 +96,8 @@ let g:multi_cursor_quit_key            = '<C-x>'
 nnoremap <C-]> :tabnext<CR>
 
 " commentary configuration
-noremap <C-m> :Commentary
+noremap <C-p> :Commentary<CR>
+
+" auto tags configuration
+let g:autotagmaxTagsFileSize = 12000
+let g:autotagTagsFile        = 'tags'

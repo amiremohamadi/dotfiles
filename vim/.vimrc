@@ -94,6 +94,10 @@ let g:multi_cursor_quit_key            = '<C-x>'
 
 " tab mangaement
 nnoremap <C-]> :tabnext<CR>
+nnoremap <C-t> :tabnew<CR>
+
+" file close
+nnoremap <C-w> :tabclose<CR>
 
 " commentary configuration
 noremap <C-p> :Commentary<CR>
@@ -101,3 +105,4 @@ noremap <C-p> :Commentary<CR>
 " auto tags configuration
 let g:autotagmaxTagsFileSize = 12000
 let g:autotagTagsFile        = 'tags'
+

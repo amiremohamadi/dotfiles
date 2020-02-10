@@ -27,6 +27,9 @@ Plug 'matze/vim-move'
 Plug 'preservim/nerdtree'
 Plug 'tomasiser/vim-code-dark'
 Plug 'sickill/vim-monokai'
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'morhetz/gruvbox'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'srcery-colors/srcery-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'hdima/python-syntax'
@@ -35,6 +38,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'craigemery/vim-autotag'
 Plug 'airblade/vim-gitgutter'
+
+
+Plug 'Shougo/deoplete.nvim'
+Plug 'padawan-php/deoplete-padawan'
 
 call plug#end()
 
@@ -54,8 +61,8 @@ set colorcolumn=80
 
 " plugins configurations
 " set theme style
-colorscheme codedark
-" colorscheme monokai
+" colorscheme codedark
+colorscheme moonfly
 
 " vim move configuration
 let g:move_map_keys = 0
@@ -106,3 +113,6 @@ noremap <C-p> :Commentary<CR>
 let g:autotagmaxTagsFileSize = 12000
 let g:autotagTagsFile        = 'tags'
 
+" vim arrow keys + ctrl combination for scrolling
+map <esc>[1;5A <C-y>
+map <esc>[1;5B <C-e>

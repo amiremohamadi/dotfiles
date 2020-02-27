@@ -38,7 +38,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'craigemery/vim-autotag'
 Plug 'airblade/vim-gitgutter'
+Plug 'enricobacis/paste.vim'
 
+Plug 'wincent/terminus'
 
 Plug 'Shougo/deoplete.nvim'
 Plug 'padawan-php/deoplete-padawan'
@@ -62,12 +64,13 @@ set colorcolumn=80
 " plugins configurations
 " set theme style
 " colorscheme codedark
-colorscheme moonfly
+colorscheme gruvbox
+set bg=dark
 
 " vim move configuration
-let g:move_map_keys = 0
-map <Esc>[1;3A <Plug>MoveLineUp
-map <Esc>[1;3B <Plug>MoveLineDown
+" let g:move_map_keys = 0
+" map <Esc>[1;3A <Plug>MoveLineUp
+" map <Esc>[1;3B <Plug>MoveLineDown
 
 " tmux navigator configuration
 let g:tmux_navigator_no_mappings = 1
@@ -107,7 +110,8 @@ nnoremap <C-t> :tabnew<CR>
 nnoremap <C-w> :tabclose<CR>
 
 " commentary configuration
-noremap <C-p> :Commentary<CR>
+nmap <C-_> :Commentary<CR>
+inoremap <C-_> :Commentary<CR>
 
 " auto tags configuration
 let g:autotagmaxTagsFileSize = 12000
@@ -116,3 +120,12 @@ let g:autotagTagsFile        = 'tags'
 " vim arrow keys + ctrl combination for scrolling
 map <esc>[1;5A <C-y>
 map <esc>[1;5B <C-e>
+
+" vim ctrl-z undo and ctrl-y redo
+" nnoremap <C-Z> u
+" nnoremap <C-Y> <C-R>
+
+" vim paste from clipboard
+let g:paste_no_mappings = 1
+nnoremap <C-v> :Paste<CR>
+vnoremap <C-c> :Copy<CR>

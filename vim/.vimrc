@@ -16,9 +16,13 @@ let g:ohmyvim="/home/amir/.oh-my-vim/bin/oh-my-vim"
 " load oh-my-vim
 source /home/amir/.vim/ohmyvim/ohmyvim.vim
 
+filetype plugin on
 
 " let plug manage plugins
 call plug#begin('~/.vim/plugged')
+
+Plug 'whonore/Coqtail'
+Plug 'let-def/vimbufsync'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " auto completion
 Plug 'jiangmiao/auto-pairs'
@@ -26,12 +30,16 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'matze/vim-move'
 Plug 'preservim/nerdtree'
 Plug 'tomasiser/vim-code-dark'
+Plug 'drsooch/gruber-darker-vim'
 Plug 'sickill/vim-monokai'
 Plug 'bluz71/vim-moonfly-colors'
 Plug 'morhetz/gruvbox'
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'sstallion/vim-wtf'
+Plug 'kamykn/dark-theme.vim'
+Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'srcery-colors/srcery-vim'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'hdima/python-syntax'
 Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline'
@@ -39,11 +47,15 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'craigemery/vim-autotag'
 Plug 'airblade/vim-gitgutter'
 Plug 'enricobacis/paste.vim'
-
 Plug 'wincent/terminus'
-
 Plug 'Shougo/deoplete.nvim'
-Plug 'padawan-php/deoplete-padawan'
+Plug 'wakatime/vim-wakatime'
+Plug 'rust-lang/rust.vim'
+
+" Formatters
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
 
 call plug#end()
 
@@ -51,6 +63,7 @@ set nocompatible
 syntax on
 set ruler
 set number
+set relativenumber
 set showcmd
 set incsearch
 set hlsearch
@@ -60,12 +73,20 @@ set softtabstop=4
 set shiftwidth=4
 set mouse=a
 set colorcolumn=80
+set cursorline
 
 " plugins configurations
 " set theme style
 " colorscheme codedark
-colorscheme gruvbox
+" colorscheme moonfly 
+colorscheme GruberDarker 
 set bg=dark
+
+" airline theme
+let g:airline_theme='codedark'
+
+" disable wrap
+set wrap!
 
 " vim move configuration
 " let g:move_map_keys = 0
@@ -111,7 +132,6 @@ nnoremap <C-w> :tabclose<CR>
 
 " commentary configuration
 nmap <C-_> :Commentary<CR>
-inoremap <C-_> :Commentary<CR>
 
 " auto tags configuration
 let g:autotagmaxTagsFileSize = 12000
@@ -127,7 +147,7 @@ map <esc>[1;5B <C-e>
 
 " vim paste from clipboard
 let g:paste_no_mappings = 1
-nnoremap <C-v> :Paste<CR>
+nnoremap <C-.> :Paste<CR>
 vnoremap <C-c> :Copy<CR>
 
 " messed up tmux with vim
@@ -138,3 +158,14 @@ if &term =~ '^screen'
     execute "set <xRight>=\e[1;*C"
     execute "set <xLeft>=\e[1;*D"
 endif
+
+
+" google-fmt configuration
+call glaive#Install()
+
+augroup autoformat_settings
+"   autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+    autocmd FileType rust AutoFormatBuffer rustfmt
+augroup END
+
+

@@ -1,52 +1,69 @@
 /*
-    this is my config to move firefox address bar and tabs
-    to the bottom of window!
-    put this file to chrome folder located under firefox directory
+CREDIT: https://github.com/Arty2/userstyles + https://github.com/jonhoo/configs/blob/master/gui/.mozilla/firefox/chrome/userChrome.css
+@version      0.2.1
+1. Navigate to `%APPDATA%\Mozilla\Firefox\Profiles` (you can copy/paste this) or locate the exact directory by visiting `about:profiles`.
+2. Create a folder named `chrome` then create a file named userChrome.css inside it and paste this code.
+3. If userChrome.css doesn’t seem to work, open `about:config` and set `toolkit.legacyUserProfileCustomizations.stylesheets=true`.
+Other references:
+Firefox Support forum - Tabs below the URL bar: https://support.mozilla.org/en-US/kb/forum-response-tabs-below-url-bar
+Custom CSS tweaks for Firefox Quantum: https://github.com/Aris-t2/CustomCSSforFx
+*/
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+/*
+tabs to bottom
+source: https://github.com/Arty2/userstyles/blob/master/tabs_to_bottom.userchrome.css
 */
 
-@namespace "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 
-@-moz-document url("chrome://browser/content/browser.xul") {
-    #PopupAutoCompleteRichResult {
-        /* bindings.xml in the same folder as userChrome.css */
-        -moz-binding: url("bindings.xml#urlbar-popup") !important;
-    }
-    
-    #navigator-toolbox {
-        display: contents !important;
-    }
-    
-    #nav-bar {
-        -moz-box-ordinal-group: 2 !important;
+/* bring the browser window to the top */
+#browser {
+	-moz-box-ordinal-group: 0 !important;
 }
 
-/* mov tabs on the bottom of firefox window */
-/* tabs on bottom of window */
-#navigator-toolbox { -moz-box-ordinal-group: 10; }
-
-#TabsToolbar { -moz-box-ordinal-group: 10; }
-
-#PopupAutoCompleteRichResult {
-  margin-top: -35vh;
-  /*
-  position: fixed;
-  bottom: 74px;
-  margin-left: 0 !important;
-  */
+:root[sizemode="normal"] #browser {
+	padding-top: 8px;
 }
 
-#PopupAutoCompleteRichResult > hbox { display: none; }
+/* hide tab toolbar when fullscreen */
+#nav-bar[inFullscreen],
+#TabsToolbar[inFullscreen] {
+	display: none;
+}
 
-.tab-background { border-top: none !important; }
+/* hide titlebar buttons */
+#TabsToolbar > .titlebar-buttonbox-container {
+	display: none !important;
+}
 
-#navigator-toolbox::after { border: none; }
 
-#TabsToolbar .tabbrowser-arrowscrollbox,
+/* remove gaps in tab bar start and end */
+.titlebar-spacer[type="pre-tabs"] {
+	display: none !important;
+}
 
-#tabbrowser-tabs, .tab-stack { min-height: 28px !important; }
+#urlbar {
+    top: unset !important;
+    bottom: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
+    box-shadow: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
 
-.tabbrowser-tab { font-size: 80%; }
+#urlbar-input-container {
+    order: 2;
+}
 
-.tab-content { padding: 0 5px; }
+#urlbar > .urlbarView {
+    order: 1;
+    border-bottom: 1px solid #666;
+}
 
-.tab-close-button .toolbarbutton-icon { width: 12px !important; height: 12px !important; }
+#urlbar-results {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.titlebar-spacer[type="post-tabs"] {
+	width: 8px !important;
+}

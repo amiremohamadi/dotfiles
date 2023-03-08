@@ -11,10 +11,10 @@
 let profiles = ['defaults']
 
 " Path to oh-my-vim binary (take care of it if you are using a virtualenv)
-let g:ohmyvim="/home/amir/.oh-my-vim/bin/oh-my-vim"
+" let g:ohmyvim="/home/amir/.oh-my-vim/bin/oh-my-vim"
 
 " load oh-my-vim
-source /home/amir/.vim/ohmyvim/ohmyvim.vim
+" source /home/amir/.vim/ohmyvim/ohmyvim.vim
 
 filetype plugin on
 
@@ -50,7 +50,9 @@ Plug 'enricobacis/paste.vim'
 Plug 'wincent/terminus'
 Plug 'Shougo/deoplete.nvim'
 Plug 'wakatime/vim-wakatime'
+
 Plug 'rust-lang/rust.vim'
+Plug 'davidhalter/jedi-vim'
 
 " Formatters
 Plug 'google/vim-maktaba'
@@ -168,4 +170,9 @@ augroup autoformat_settings
     autocmd FileType rust AutoFormatBuffer rustfmt
 augroup END
 
+" italic comments
 
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+highlight Comment cterm=italic gui=italic
+highlight String cterm=italic gui=italic

@@ -24,7 +24,7 @@ font pango:monospace 12
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -39,8 +39,8 @@ set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/i3-volume/volume -n up 5
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/i3-volume/volume -n down 5
 # Also with ctrl-alt-up/down
-bindsym Control+Mod1+Up exec --no-startup-id ~/i3-volume/volume -n up 5
-bindsym Control+Mod1+Down exec --no-startup-id ~/i3-volume/volume -n down 5
+bindsym Control+Mod1+Up exec --no-startup-id NO_NOTIFY_COLOR=1 ~/i3-volume/volume -n up 5
+bindsym Control+Mod1+Down exec --no-startup-id NO_NOTIFY_COLOR=1 ~/i3-volume/volume -n down 5
 
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
@@ -188,28 +188,33 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Screenshot
-bindsym --release $mod+p exec "scrot -s '%Y:%m:%d:%H:%M:%S.png' -e 'mv $f ~/Pictures/screenshots'"
+bindsym --release $mod+p exec "scrot -s '%Y:%m:%d:%H:%M:%S.png' -e 'mv $f ~/Pictures/screenshots/'"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command .local/bin/bumblebee-status -m layout-xkb date time -p time.format="%H:%M" -t gruvbox
+    font pango:UbuntuMono 15
+    status_command i3status-rs ~/.config/i3status-rust/config.toml
 }
 
 # Wallpaper
-# exec --no-startup-id "feh --bg-fill wallpaper.jpg"
+exec --no-startup-id "feh --bg-fill /home/amir/Pictures/wallpaper.jpg"
 
 # Don't focus with mouse move
 focus_follows_mouse no
 
 # Remap keys
 # exec --no-startup-id "setxkbmap -layout us,ir && setxkbmap -option 'grp:alt_shift_toggle' && setxkbmap -option caps:backspace && xmodmap -e 'clear Lock'"
+exec --no-startup-id "setxkbmap -layout us,ir && setxkbmap -option 'grp:alt_shift_toggle'"
 
 # Default Workspaces
-exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/firefox'
 exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/alacritty'
+exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/firefox'
+exec --no-startup-id i3-msg 'workspace 3; exec /usr/bin/telegram'
 
 client.focused #000000 #555555 #ffffff #000000
 
 # Firefox with no title-bar
-for_window [class="(?i)firefox"] border pixel 1
+for_window [class="(?i)firefox"] border pixel 0
+for_window [class="^Telegram"] border pixel 0
+for_window [class="Alacritty"] border pixel 0
